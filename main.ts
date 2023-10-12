@@ -7,7 +7,9 @@ app.use(async (ctx: oak.Context) => {
   await ctx.cookies.set("foo", "somevalue", {
     httpOnly: true,
     secure: true,
-    ignoreInsecure: false,
+
+    // This must be true since the secure connection is on the deno deploy entrypoint, but not to the web app itself.
+    ignoreInsecure: true,
   });
   ctx.response.status = 204
 })
